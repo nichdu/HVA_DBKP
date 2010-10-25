@@ -1,0 +1,14 @@
+## Interface: 40000
+## Title: HVA_DBKP
+## Notes: Data storing module for the HVA-DKP suite
+## Author: laroawen
+## Version: @project-version@
+## SavedVariables: HVA_DBKP_DB
+
+
+## X-License: Sat's Addon License
+
+
+libs\libs.xml
+
+core.lua

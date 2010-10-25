@@ -1,0 +1,14 @@
+## Interface: 40000
+## Title: HVA_GetDKP
+## Notes: GetDKP module of the HVA-DKP suite
+## Author: laroawen
+## Version: @project-version@
+## SavedVariables: HVA_GetDKP_DB
+
+
+## X-License: Sat's Addon License
+
+
+libs\libs.xml
+
+core.lua
