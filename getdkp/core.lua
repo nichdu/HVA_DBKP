@@ -13,7 +13,7 @@ end;
 -- OnInitialize
 function HVA_GetDKP:OnInitialize()
 --@debug@
-	self:Print('OnInitialize');
+--	self:Print('OnInitialize');
 --@end-debug@
 	self.db = LibStub("AceDB-3.0"):New("HVA_GetDKP_DB", defaults, "realm");
 end;
@@ -21,7 +21,7 @@ end;
 -- OnEnable
 function HVA_GetDKP:OnEnable()
 --@debug@
-    self:Print('OnEnable');
+--    self:Print('OnEnable');
 --@end-debug@
 	self:RegisterEvent("CHAT_MSG_WHISPER", "IncWhisper");
 	self:RegisterEvent("CHAT_MSG_RAID", "IncRaid");
@@ -41,8 +41,10 @@ function HVA_GetDKP:IncRaid(event, message, sender,...)
 		local dkplist = self:GetTopDKP();
 		local msg = prefix .. L["List of DKP leaders"];
 		SendChatMessage(msg, "RAID");
+		print(msg)
 		for i=1,#dkplist do
 			SendChatMessage(prefix .. i.. ". " .. dkplist[i]["Name"] .. ": " .. dkplist[i]["dkp"]);
+			print(prefix..i..". "..dkplist[i]["Name"]..": "..dkplist[i]["dkp"]);
 		end;
 	end;
 end;

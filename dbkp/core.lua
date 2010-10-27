@@ -13,7 +13,7 @@ end;
 -- OnInitialize
 function HVA_DBKP:OnInitialize()
 --@debug@
-	self:Print('OnInitialize');
+--	self:Print('OnInitialize');
 --@end-debug@
 	self.db = LibStub("AceDB-3.0"):New("HVA_DBKP_DB", defaults, "realm");
 end;
@@ -21,7 +21,7 @@ end;
 -- OnEnable
 function HVA_DBKP:OnEnable()
 --@debug@
-    self:Print('OnEnable');
+--    self:Print('OnEnable');
 --@end-debug@
 end;
 
