@@ -1,6 +1,7 @@
 local addonName, addonData = ...;
-HVA_ListDKP = LibStub("AceAddon-3.0"):NewAddon("HVA_ListDKP", "AceConsole-3.0", "AceTimer-3.0", "AceEvent-3.0");
+local addon = LibStub("AceAddon-3.0"):NewAddon("HVA_ListDKP", "AceConsole-3.0", "AceTimer-3.0", "AceEvent-3.0");
 local L = LibStub("AceLocale-3.0"):GetLocale("HVA_ListDKP", true);
+_G["HVA_listDKP"] = addon;
 
 local function CreateGUI()
 	-- u o3 plz
@@ -59,5 +60,33 @@ local function CreateGUI()
 	title:SetHeight(16)
 	title:SetPoint("TOP", 3, -16)
 	f.title = title
-
+	
+	local refresh = CreateFrame("Button", "listDKPrefresh", f, "UIPanelButtonTemplate2");
+	refresh:SetWidth(115);
+	refresh:SetHeight(22);
+	refresh:SetNormalFontObject(GameFontNormalSmall);
+	refresh:SetHighlightFontObject(GameFontHighlightSmall);
+	refresh:SetDisabledFontObject(GameFontDisableSmall);
+	refresh:SetText(L["Refresh"]);
+	refresh:SetPoint("TOPLEFT", 72, -37);
+	refresh:SetScript("OnClick", function()
+		addon:ListRaidDKP();
+	end;);
+	refresh.tooltipText = L["Refreshes window"];
+	refresh.newbieText = L["Refreshes the list of raid members and their DKP to show up to date values."];
+	
+	local options = CreateFrame("Button", "listDKPOptions", f, "UIPanelButtonTemplate2");
+	options:SetWidth(115);
+	options:SetHeight(22);
+	options:SetNormalFontObject(GameFontNormalSmall);
+	options:SetHighlightFontObject(GameFontHighlightSmall);
+	options:SetDisabledFontObject(GameFontDisableSmall);
+	options:SetText(L["Options"]);
+	options:SetPoint("TOPRIGHT", -40, -37);
+	options:SetScript("OnClick", function();
+		InterfaceOptionsFrame_OpenToCategory("HVA_ListDKP");
+	end;);
+	options:Disable();
+	
+	-- line 520
 end;
