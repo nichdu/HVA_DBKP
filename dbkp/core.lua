@@ -39,7 +39,7 @@ function HVA_DBKP:ChangeDKP(player, value)
 		self.db.realm[player] = self.db.realm[player] + value;
 		return self.db.realm[player];
 	else
-		return false;
+		return -1;
 	end;
 end;
 
@@ -48,7 +48,7 @@ function HVA_DBKP:ResetDKP(player)
 		self.db.realm[player] = 0;
 		return self.db.realm[player];
 	else
-		return false;
+		return -1;
 	end;
 end;
 
@@ -56,6 +56,6 @@ function HVA_DBKP:GetDKP(player)
 	if (self.db.realm[player]) then
 		return self.db.realm[player];
 	else
-		return false;
+		return -1;
 	end;
 end;
