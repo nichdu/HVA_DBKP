@@ -52,28 +52,28 @@ local function CreateGUI()
 	botright:SetHeight(256)
 	botright:SetPoint("BOTTOMRIGHT")
 
-	local close = CreateFrame("Button", nil, f, "UIPanelCloseButton")
-	close:SetPoint("TOPRIGHT", -30, -8)
+	local cl= CreateFrame("Button", nil, f, "UIPanelCloseButton")
+	cl:SetPoint("TOPRIGHT", -30, -8)
 
-	local title = f:CreateFontString(nil, "ARTWORK", "GameFontNormal")
-	title:SetWidth(250)
-	title:SetHeight(16)
-	title:SetPoint("TOP", 3, -16)
-	f.title = title
+	local ti = f:CreateFontString(nil, "ARTWORK", "GameFontNormal")
+	ti:SetWidth(250)
+	ti:SetHeight(16)
+	ti:SetPoint("TOP", 3, -16)
+	f.title = ti
 	
-	local refresh = CreateFrame("Button", "listDKPrefresh", f, "UIPanelButtonTemplate2");
-	refresh:SetWidth(115);
-	refresh:SetHeight(22);
-	refresh:SetNormalFontObject(GameFontNormalSmall);
-	refresh:SetHighlightFontObject(GameFontHighlightSmall);
-	refresh:SetDisabledFontObject(GameFontDisableSmall);
-	refresh:SetText(L["Refresh"]);
-	refresh:SetPoint("TOPLEFT", 72, -37);
-	refresh:SetScript("OnClick", function()
+	local r = CreateFrame("Button", "listDKPrefresh", f, "UIPanelButtonTemplate2");
+	r:SetWidth(115);
+	r:SetHeight(22);
+	r:SetNormalFontObject(GameFontNormalSmall);
+	r:SetHighlightFontObject(GameFontHighlightSmall);
+	r:SetDisabledFontObject(GameFontDisableSmall);
+	r:SetText(L["Refresh"]);
+	r:SetPoint("TOPLEFT", 72, -37);
+	r:SetScript("OnClick", function()
 		addon:ListRaidDKP();
 	end;);
-	refresh.tooltipText = L["Refreshes window"];
-	refresh.newbieText = L["Refreshes the list of raid members and their DKP to show up to date values."];
+	r.tooltipText = L["Refreshes window"];
+	r.newbieText = L["Refreshes the list of raid members and their DKP to show up to date values."];
 	
 	local options = CreateFrame("Button", "listDKPOptions", f, "UIPanelButtonTemplate2");
 	options:SetWidth(115);
@@ -88,5 +88,43 @@ local function CreateGUI()
 	end;);
 	options:Disable();
 	
-	-- line 520
+	local sub = CreateFrame("Frame",nil,f);
+	sub:SetPoint("TOPLEFT", 18, -70);
+	sub:SetPoint("BOTTOMRIGHT", -40, 78);
+	contentF = sub;
+	
+	local list = CreateFrame("Frame", "listDKPListFrame", sub);
+	list:SetAllPoints(sub);
+	
+	local scrollframe = CreateFrame("ScrollFrame", liseDKPScrollFrame, list, "FauxScrollFrameTemplate");
+	scrollframe:SetPoint("BOTTOMLEFT", list, 0, 33);
+	local function scrollUpdate() addon:scrollUpdate(); end;
+	scrollframe:SetScript("OnVerticalScroll", function(self, offset)
+		FauxScrollFrame_OnVerticalScroll(self, offset, 16, ScrollUpdate);
+	end;)
+	
+	sub.scrollFrame = scrollframe;
+	sub.listFrame = list;
+	
+	local scrolframebottom = CreateFrame("Frame", "listDKPScrollFrameBottom", list);
+	scrollframebottom:SetPoint("TOPLEFT", scrollframe, "BOTTOMLEFT", 0, -1);
+	scrollframebottom:SetPoint("BOTTOMRIGHT", sub, "BOTTOMRIGHT");
+	scrollframebottom:SetFrameLevel(sub:GetFrameLevel());
+	
+	local scrollbar = CreateFrame("Button", nil, scrollframebottom, 3, 3);
+	scrollbar:SetPoint("TOPLEFT", scrollframebottom, 3, 3);
+	scrollbar:SetPoint("TOPRIGHT", scrollframebottom, -4, 3);
+	scrollbar:SetHeight(8);
+	
+	local scrollbarmiddle = bar:CreateTexture(nil, "BORDER");
+	scrollbarmiddle:SetTexture("Interface\\ClassTrainerFrame\\UI-ClassTrainer-HorizontalBar");
+	scrollbarmiddle:SetAllPoints(scrollbar);
+	scrollbarmiddle:SetTexCoord(0.29296874, 1, 0, 0.25);
+	
+	local scrollframetop = CreateFrame("Frame", "listDKPScrollFrameTop", list);
+	scrollframetop:SetPoint("TOPLEFT", sub);
+	scrollframetop:SetPoint("TOPRIGHT" sub);
+	scrollframetop:SetHeight(27);
+	
+	-- line 580
 end;
