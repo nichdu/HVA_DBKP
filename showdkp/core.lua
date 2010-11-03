@@ -126,5 +126,12 @@ local function CreateGUI()
 	scrollframetop:SetPoint("TOPRIGHT" sub);
 	scrollframetop:SetHeight(27);
 	
+	scrollbar = CreateFrame("Button", nil, scrollframetop);
+	scrollbar:SetPoint("BOTTOMLEFT", scrollframetop, 3, -2);
+	scrollbar:SetPoint("BOTTOMRIGHT", scrollframetop, -4, -2);
+	scrollbar:SetHeight(5);
+	
+	
+	
 	-- line 580
 end;
